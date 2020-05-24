@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "exmulti",
-    "slug": "exmulti",
+    "name": "antarabaru",
+    "slug": "antarabaru",
     "privacy": "public",
     "sdkVersion": "33.0.0",
     "platforms": [
@@ -13,7 +13,7 @@
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/unnamed.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -24,7 +24,13 @@
       "**/*"
     ],
     "ios": {
+      "bundleIdentifier": "com.antara.antara",
       "supportsTablet": true
-    }
+    },
+    "android": {
+      "versionCode": 2,
+      "package": "com.antara.antara"
+    },
+    "description": ""
   }
 }

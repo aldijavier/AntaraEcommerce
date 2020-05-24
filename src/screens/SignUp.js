@@ -1,23 +1,28 @@
 'use strict'
-import React, { Component } from 'react'
+import * as React from 'react';
 import {
-    View, StyleSheet, Text, Alert, ScrollView
+    View, StyleSheet, Text, Alert, ScrollView, FlatList
 } from 'react-native'
-
+import RadioButton from 'react-native-simple-radio-button'
+import RadioGroup from 'react-native-simple-radio-button'
 import Container            from './../resources/components/Container'
 import NavBar               from './../resources/components/NavBar'
 import Input                from './../resources/components/form/Input'
 import Button               from './../resources/components/form/Button'
 import colors               from './../resources/styles/colors'
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import RadioForm from 'react-native-simple-radio-button';
 
-class SignUp extends Component {
-    handleChoosePhoto = () => {
-        const options = {};
-        ImagePicker.launchImageLibrary(options, response => {
-            console.log ("response", response);
-        })
-    }
+const radio = ['Pelajar','Non Pelajar']
+
+var radio_props = [
+    {label: 'instansi', kategori: 0 },
+    {label: 'media', kategori: 1 },
+    {label: 'pelajar', kategori: 2 }
+  ];
+
+
+class SignUp extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -25,13 +30,16 @@ class SignUp extends Component {
             password: '',
             konfirmasikatasandi: '',
             nama_awal: '',
-            nama_akhir: '',
+            kategori: '',
             nomorhp: '',
-        }
+        }  
+        
     }
 
+    setRadio = (kategori) => {
+        this.setState({kategori:kategori}) }
 
-    render() {
+    render() { 
         return (
             <Container>
                 <NavBar hideBackButton={true} navigator={ this.props.navigator } title={ 'Daftar' } />
@@ -43,29 +51,35 @@ class SignUp extends Component {
                     </View>
                     <View style={ styles.group }>
                         <Text style={ styles.label }>{ 'Kata Sandi' }</Text>
-                        <Input secureTextEntry={true} autoCapitalize='none'  placeholder='Kata Sandi' onChangeText={password => this.setState({ password })} />
+                        <Input secureTextEntry={true}  placeholder='Kata Sandi' onChangeText={password => this.setState({ password })} />
                     </View>
                     <View style={ styles.group }>
                         <Text style={ styles.label }>{ 'Ketik Ulang Kata Sandi' }</Text>
                         <Input secureTextEntry={true} placeholder='Ketik Ulang Kata Sandi' onChangeText={konfirmasikatasandi => this.setState({konfirmasikatasandi})} />
                     </View>
                     <View style={ styles.group }>
-                        <Text style={ styles.label }>{ 'Masukkan Nama Awal' }</Text>
-                        <Input secureTextEntry={true} placeholder='Ketik Ulang Kata Sandi' onChangeText={nama_awal => this.setState({nama_awal})} />
+                        <Text style={ styles.label }>{ 'Masukkan Nama' }</Text>
+                        <Input placeholder='Masukkan Nama' onChangeText={nama_awal => this.setState({nama_awal})} />
                     </View>
                     <View style={ styles.group }>
-                        <Text style={ styles.label }>{ 'Masukkan Nama Akhir' }</Text>
-                        <Input secureTextEntry={true} placeholder='Ketik Ulang Kata Sandi' onChangeText={nama_akhir => this.setState({nama_akhir})} />
+                    <Text style={ styles.label }>{ 'Pilih Kategori' }</Text>
+                    <Text style={ styles.label }>{''}</Text>
+                    {radio.map((kategori, index)=>(
+                        <TouchableOpacity onPress={this.setRadio.bind(null, kategori)} key={index} style={{flexDirection:'row', marginBottom: 15}}>
+                        <View style={this.state.kategori === kategori ? styles.select: styles.unSelect}/>
+                        <Text style={{marginLeft:10}}>{kategori}</Text>
+                        </TouchableOpacity>
+                        ))}
                     </View>
                     <View style={ styles.group }>
                         <Text style={ styles.label }>{ 'Nomor Handphone' }</Text>
                         <Input autoCapitalize='none' placeholder='Nomor Handphone' onChangeText={nomorhp => this.setState({ nomorhp })} />
                     </View>
-                    <Text style={ styles.agreement }>{ 'Agreement' }</Text>
                     <Button title='Daftar' onPress={() => this.registrasi() } />
                 </View>
                 </ScrollView>
             </Container>
+
         )
     }
 
@@ -74,14 +88,14 @@ class SignUp extends Component {
         const { password }  = this.state ;
         const { konfirmasikatasandi }  = this.state ;
         const { nama_awal }  = this.state ;
-        const { nama_akhir }  = this.state ;
+        const {kategori} = this.state;
         const { nomorhp }  = this.state ;
         
         
         if (password !== konfirmasikatasandi) {
             alert("Kata sandi tidak sama"); }
         else {
-            fetch('http://192.168.1.125/antara/register.php', {
+            fetch('http://192.168.56.1/antara/register.php', {
                 method: 'POST',
                 headers: {
                             'Accept': 'application/json',
@@ -91,7 +105,7 @@ class SignUp extends Component {
         email: email,
         password: password,
         nama_awal: nama_awal,
-        nama_akhir: nama_akhir,
+        kategori: kategori,
         nomorhp: nomorhp
     })
  
@@ -100,7 +114,9 @@ class SignUp extends Component {
         
 // Showing response message coming from server after inserting records.
         Alert.alert(responseJson);
- 
+        this.props.navigator.push({
+            ident: 'SignIn',
+            redirectIdent: this.props.redirectIdent })
       }).catch((error) => {
         console.error(error);
       });
@@ -116,6 +132,19 @@ class SignUp extends Component {
 }
 
 const styles = StyleSheet.create({
+    select:{
+        backgroundColor:'red',
+        height:20,
+        width:20,
+        borderRadius:100
+      },
+      unSelect:{
+        borderWidth:1,
+        borderColor:'red',
+        height:20,
+        width:20,
+        borderRadius:100
+      },
     body: {
         padding: 20
     },

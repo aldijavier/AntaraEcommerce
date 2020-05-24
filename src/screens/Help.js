@@ -22,7 +22,7 @@ class Help extends Component {
     render() {
         return (
             <Container>
-                <NavBar hideBackButton={true} navigator={ this.props.navigator } title={ 'Help' } />
+                <NavBar hideBackButton={true} navigator={ this.props.navigator } title={ 'Bantuan' } />
                 <ListView
                     enableEmptySections={ true }
                     dataSource={ this.state.dataSource }

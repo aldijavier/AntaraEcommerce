@@ -10,8 +10,8 @@ const categories = {
             name: 'Foto'
         },
         {
-            imageUri: 'https://image.flaticon.com/icons/png/512/21/21601.png',
-            name: 'Berita'
+            imageUri: 'https://www.penuliscilik.com/wp-content/uploads/2015/11/Misteri-Dokumen-Sains.png',
+            name: 'Dokumen'
         },
     ]
 }

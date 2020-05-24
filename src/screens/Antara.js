@@ -7,7 +7,7 @@ import {
 import Container            from '../resources/components/Container'
 import colors               from '../resources/styles/colors'
 import Icon                 from 'react-native-vector-icons/FontAwesome'
-import AntaraData           from '../data/antara'
+import antara           from '../data/antara'
 
 class Antara extends Component {
 
@@ -15,7 +15,7 @@ class Antara extends Component {
         super(props)
         const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
         this.state = {
-            dataSource: ds.cloneWithRows(AntaraData.data),
+            dataSource: ds.cloneWithRows(antara.data),
         };
     }
 

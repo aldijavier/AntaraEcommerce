@@ -23,7 +23,7 @@ export default class CheckoutConfirmTabScreen extends Component {
     }
 
     render() {
-        let image = stepCheckout.CheckoutStep2
+        let image = stepCheckout.CheckoutStep1
         return (
             <ScrollView style={styles.container}>
                 <View style = {styles.contentWrap}>

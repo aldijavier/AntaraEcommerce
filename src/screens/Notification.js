@@ -22,7 +22,7 @@ class Notification extends Component {
     render() {
         return (
             <Container>
-                <NavBar hideBackButton={true} navigator={ this.props.navigator } title={ 'Notifikasi' } />
+                <NavBar hideBackButton={true} navigator={ this.props.navigator } title={ 'Notifications' } />
                 <ListView
                     enableEmptySections={ true }
                     dataSource={ this.state.dataSource }

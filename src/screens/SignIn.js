@@ -35,7 +35,7 @@ class SignIn extends Component {
                     <View style={styles.group}>
 
                     </View>
-                    <Button title={ 'Masuk' } onPress={this.signin} />
+                    <Button title={ 'Masuk' } onPress={this._signin} />
                     <View></View>
                     <TouchableOpacity tittle ={'Daftar' } onPress={() => this._pressSignUp() } style={ styles.btnRegister } color={'Red'} >
                         <Text style={ styles.btnRegisterTxt }>{ 'Daftar' }</Text>
@@ -48,11 +48,11 @@ class SignIn extends Component {
         )
     }
 
-    signin = () => {
+    _signin = () => {
         const { UserEmail }  = this.state ;
          const { UserPassword }  = this.state ;
  
-        fetch('http://192.168.1.125/antara/login.php', {
+        fetch('http://192.168.56.1/antara/login.php', {
         method: 'POST',
         headers: {
                     'Accept': 'application/json',
@@ -73,7 +73,7 @@ class SignIn extends Component {
         {
             //Then open Profile activity and send user email to profile activity.
             this.props.navigator.push({
-                ident: 'Antara',
+                ident: 'Myantara',
                 redirectIdent: this.props.redirectIdent
             })
         }

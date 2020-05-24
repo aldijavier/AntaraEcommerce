@@ -115,7 +115,7 @@ class ProductDetail extends Component {
                     </View>
                     <View style={ styles.btnTab } >
                         <Text>Pilihan Harga</Text>
-                        <ModalDropdown options={['Mahasiswa', 'Industry','Media']}/>
+                        <ModalDropdown options={['1024x720', '1666x320','120x720']}/>
                     </View>
                 </View>
             </View>
@@ -133,7 +133,7 @@ class ProductDetail extends Component {
 
     _pressCheckoutNow() {
         this.props.navigator.push({
-            ident: 'CheckoutKedua',
+            ident: 'CheckoutKetiga',
             redirectIdent: this.props.redirectIdent
         })
     }

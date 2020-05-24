@@ -10,6 +10,7 @@ import colors                   from './src/resources/styles/colors'
 import Route                    from './src/Route'
 
 
+
 export default class App extends Component {
     constructor(props) {
         super(props)
@@ -68,13 +69,13 @@ export default class App extends Component {
                 
                 <TabNavigator.Item
                     tabStyle={ styles.tab }
-                    selected={this.state.selectedTab === 'notification'}
-                    title={ 'Notifikasi' }
+                    selected={this.state.selectedTab === 'Help'}
+                    title={ 'Bantuan' }
                     titleStyle={ styles.title }
-                    renderIcon={() => <Icon name="bell-o" size={25} style={[ styles.icon, { color: colors.txt_description }]} />}
-                    renderSelectedIcon={() => <Icon name="bell" size={25} style={[ styles.icon, { color: colors.txt_main }]} />}
-                    onPress={() => this.setState({ selectedTab: 'notification' })}>
-                    <Route initialRoute={{ ident: 'Notification' }} />
+                    renderIcon={() => <Icon name="question" size={25} style={[ styles.icon, { color: colors.txt_description }]} />}
+                    renderSelectedIcon={() => <Icon name="question" size={25} style={[ styles.icon, { color: colors.txt_main }]} />}
+                    onPress={() => this.setState({ selectedTab: 'Help' })}>
+                    <Route initialRoute={{ ident: 'Help' }} />
                 </TabNavigator.Item>
  
             </TabNavigator>

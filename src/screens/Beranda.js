@@ -1,7 +1,7 @@
 'use strict'
 import React, { Component } from 'react'
 import {
-    Text, Image, View, StyleSheet, TouchableOpacity, ScrollView
+    Text, Image, View, StyleSheet, TouchableOpacity, ScrollView, Alert, Platform, ListView, FlatList
 } from 'react-native'
 
 import Container                        from '../resources/components/Container'
@@ -22,7 +22,7 @@ class Beranda extends Component {
         this.state = {
             position: 1,
             interval: null,
-            dataSource: [
+            dataSourcer: [
               {
                 title: 'Hari Buruh',
                 caption: 'Hari buruh pada tanggal 1 Mei',
@@ -40,11 +40,38 @@ class Beranda extends Component {
           };
     }
 
+    GetItem (nama_produk, id_jenis) {
+  
+        Alert.alert(nama_produk);
+       
+        }
+    
+    webCall() {
+        return fetch('http://192.168.56.1/antara/fotoekonomi.php')
+         .then((response) => response.json())
+         .then((responseJson) => {
+           this.setState({
+             dataSource: responseJson
+           }, function() {
+             // In this block you can do something with new state.
+           });
+         })
+         .catch((error) => {
+           console.error(error);
+         });
+          }
+    
+          componentDidMount(){
+
+            this.webCall();
+          
+           }
+
     componentWillMount() {
         this.setState({
           interval: setInterval(() => {
             this.setState({
-              position: this.state.position === this.state.dataSource.length ? 0 : this.state.position + 1
+              position: this.state.position === this.state.dataSourcer.length ? 0 : this.state.position + 1
             });
           }, 5000)
         });
@@ -61,7 +88,7 @@ class Beranda extends Component {
                 {/* Body */}
                 <ScrollView>
                     { this._renderSwiperList(BerandaData.yourRecentlyViewed) }
-                    { this._renderGridList(BerandaData.featuredDeals) }
+                    { this._renderGridList() }
                 </ScrollView>
             </Container>
         )
@@ -79,7 +106,7 @@ class Beranda extends Component {
                 <View style={ styles.headerSub }>
                     <Image style={ styles.logo } source={ require('./../resources/images/logoantara11.png') } />
                 </View>
-
+                
                 <View style={ styles.btnSearchHolder }>
                     <TouchableOpacity
                         style={ styles.btnSearch }
@@ -97,7 +124,7 @@ class Beranda extends Component {
                             tabBar: this.props.tabBar
                         })}>
                             <Icon style={ [styles.icoDeals, { marginTop: 2 }] } name='th-large' size={ 16 } />
-                            <Text style={ styles.btnSearchTitle }>{'Kategori' }</Text>
+                            <Text style={ styles.btnSearchTitle }>{'Jenis Berita' }</Text>
                     </TouchableOpacity>
                 </View>
             </View>
@@ -109,32 +136,54 @@ class Beranda extends Component {
             <View style={styles.MainContainer}>
  
         <Slideshow
-          dataSource={this.state.dataSource}
+          dataSource={this.state.dataSourcer}
           position={this.state.position}
           onPositionChanged={position => this.setState({ position })}
            />
  
       </View>
         )
-    }
+    } 
 
-    _renderGridList(data) {
+    FlatListItemSeparator = () => {
         return (
-            <ListPanel
-                onPressSeeAll={ ()=> this._pressSeeAllProducts({ navBarTitle: data.title }) }
-                title={ data.title }
-                description={ data.description }>
-                    <Grid>
-                        {
-                            data.items.map((item, idx) => {
-                               return <GridProductThumb
-                                            onPress={() => this._pressProduct(item.id) }
-                                            key={ idx } { ...item }/>
-                            })
-                        }
-                    </Grid>
-            </ListPanel>
-        )
+          <View
+            style={{
+              height: .5,
+              width: "100%",
+              backgroundColor: "#000",
+            }}
+          />
+        );
+      }
+     
+
+    _renderGridList() {
+        return(
+        <View style={styles.MainContainer}>
+       <FlatList
+       
+        data={ this.state.dataSource }
+        
+        ItemSeparatorComponent = {this.FlatListItemSeparator}
+
+        renderItem={({item}) => 
+        
+            <View style={{flex:1, flexDirection: 'row'}}>
+    
+              <Image source = {{ uri: item.berkas }} style={styles.imageView} />
+            
+              <Text onPress={this.GetItem.bind(this, item.nama_produk)} style={styles.textView} >{item.nama_produk}</Text>
+
+            </View>
+          }
+
+        keyExtractor={(item, index) => index.toString()}
+        
+        />
+ 
+     </View>
+     );
     }
 
     _pressProduct(id) {
@@ -230,7 +279,43 @@ const styles = StyleSheet.create({
     icoDeals: {
         color: colors.txt_description,
         marginRight: 10
-    }
+    },
+     
+MainContainer :{
+ 
+    justifyContent: 'center',
+    flex:1,
+    margin: 5,
+    marginTop: (Platform.OS === 'ios') ? 20 : 0,
+ 
+},
+ 
+imageView: {
+
+    width: '50%',
+    height: 100 ,
+    margin: 7,
+    borderRadius : 7
+ 
+},
+ 
+textView: {
+
+    width:'50%', 
+    textAlignVertical:'center',
+    padding:10,
+    color: '#000'
+ 
+},
+
+textViewjenis: {
+
+    width:'50%', 
+    textAlignVertical:'center',
+    padding:30,
+    color: '#000'
+ 
+}
 })
 
 module.exports = Beranda

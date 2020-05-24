@@ -61,38 +61,38 @@ const BerandaData = {
         ]
     },
     featuredDeals: {
-        title: 'Produk Lainnya',
+        title: 'Paket Ekonomis',
         description: '',
         items: [
             {
                 id: 1,
-                name: 'Video 1945',
+                name: 'Paket Ekonomis 1',
                 imageUri: 'https://v-images2.antarafoto.com/hari-buruh-l1mpl5-psbc.jpg',
-                prize: 80,
+                prize: 80000,
                 regularPrize: 100.00,
                 discountPercent: 20
             },
             {
                 id: 2,
-                name: 'Video 1945',
+                name: 'Paket Ekonomis 2',
                 imageUri: 'https://v-images2.antarafoto.com/hari-buruh-l1mplg-psbc.jpg',
-                prize: 7.99,
+                prize: 900000,
                 regularPrize: 29.99,
                 discountPercent: 73
             },
             {
                 id: 3,
-                name: 'Video 1945',
+                name: 'Paket Ekonomis 3',
                 imageUri: 'https://v-images2.antarafoto.com/hut-49-soekarno-l3i0i2-psbc.jpg',
-                prize: 30.10,
+                prize: 250000,
                 regularPrize: 39.99,
                 discountPercent: 25
             },
             {
                 id: 4,
-                name: 'Video 1945',
+                name: 'Paket Ekonomis 4',
                 imageUri: 'https://v-images2.antarafoto.com/tkr-jetlp8-psbc.jpg',
-                prize: 8.00,
+                prize: 50000,
                 regularPrize: 10.00,
                 discountPercent: 20
             }

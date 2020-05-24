@@ -1,7 +1,7 @@
 'use strict'
-const AntaraData = {
+const antara = {
     data: [
         
     ]
 }
-export default AntaraData
+export default antara

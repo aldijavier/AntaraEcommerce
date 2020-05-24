@@ -15,7 +15,7 @@ class Categories extends Component {
     render() {
         return (
             <Container>
-                <NavBar navigator={ this.props.navigator } title={ 'Kategori' } style={{color: '#6c0000'}}/>
+                <NavBar navigator={ this.props.navigator } title={ 'Jenis Berita' } style={{color: '#FFFFF'}}/>
                 <ScrollView>
                     { this._renderGridList(categories.data) }
                 </ScrollView>

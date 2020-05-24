@@ -6,7 +6,7 @@ import {Navigator} from'react-native-deprecated-custom-components'
 import Beranda                     from './screens/Beranda'
 import SignIn                   from './screens/SignIn'
 import SignUp                   from './screens/SignUp'
-import Antara                   from './screens/Antara'
+import Myantara                   from './screens/Myantara'
 import Search                   from './screens/Search'
 import Notification             from './screens/Notification'
 import Categories               from './screens/Categories'
@@ -22,6 +22,7 @@ import CheckoutKetiga           from './screens/CheckoutKetiga'
 import CheckoutKeempat          from './screens/CheckoutKeempat'
 import Help                     from './screens/Help'
 import Categories2              from './screens/Categories2'
+import Notif                    from './screens/Notif'
 
 class Route extends Component {
     constructor(props) {
@@ -43,7 +44,7 @@ class Route extends Component {
         switch(ident) { // check route ident to return correct screen
             case 'SignIn':              return <SignIn { ...globalData } />
             case 'SignUp':              return <SignUp { ...globalData } /> // Redirect to coreect ident after sign up
-            case 'Antara':              return <Antara { ...globalData } />
+            case 'Myantara':              return <Myantara { ...globalData } />
             case 'Search':              return <Search { ...globalData } />
             case 'Notification':        return <Notification { ...globalData } />
             case 'Categories':          return <Categories { ...globalData } />
@@ -59,6 +60,7 @@ class Route extends Component {
             case 'CheckoutKeempat':     return <CheckoutKeempat {...globalData} />
             case 'Help':                return <Help {...globalData} />
             case 'Categories2':         return <Categories2 {...globalData} />
+            case 'Notif':               return <Notif {...globalData} />
             default:                    return <Beranda { ...globalData } /> // tabBar is use for search button on Beranda page
         }
     }

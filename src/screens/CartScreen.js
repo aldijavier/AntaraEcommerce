@@ -21,7 +21,13 @@ class CartScreen extends Component {
 
     pressCheckoutPertama(){
         this.props.navigator.push({
-            ident: 'CheckoutKedua'
+            ident: 'CheckoutKetiga'
+        })
+    }
+
+    kembali(){
+        this.props.navigator.push({
+            ident: 'ProductDetail'
         })
     }
 
@@ -48,7 +54,7 @@ class CartScreen extends Component {
                             <Text style={{color: '#388e3c'}}>Antara</Text>
                         </View>
 
-                        <View style={{flex: 1, flexDirection: 'row', justifyContent: 'space-between', marginTop: 20}}>
+                        <View style={{flex: 1, flexDirection: 'row', justifyContent: 'space-between', marginTop: 15}}>
                             <Text style={styles.summary_text}>
                                 Total Pembayaran
                             </Text>
@@ -120,7 +126,7 @@ class CartScreen extends Component {
                     { this.renderPriceDetail() }
 
                     <View style={styles.block_section}>
-                        <TouchableOpacity style={ [styles.button_group_item, {backgroundColor: '#6e7476'}]} onPress={()=> this.pressCheckoutPertama()}>
+                        <TouchableOpacity style={ [styles.button_group_item, {backgroundColor: '#6e7476'}]} onPress={()=> this.kembali()}>
                             <Text style={{color: "#fff"}}>Kembali</Text>
                         </TouchableOpacity>
                         <TouchableOpacity style={ [styles.button_group_item, {backgroundColor: '#6e7476'}]} onPress={()=> this.pressCheckoutPertama()}>
